@@ -21,7 +21,7 @@ $(BIN_DIR):
 
 
 .PHONY: clean
-	clean:
-		rm -f lexer.c $(OBJECTS) $(TARGETS) 
-			rmdir $(BIN_DIR)
+clean:
+	rm $(OBJECTS) $(TARGETS) 
+	rmdir $(BIN_DIR)
 
