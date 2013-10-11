@@ -1,27 +1,53 @@
 #define _GNU_SOURCE
 
 #include <unistd.h>
-#include<stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "calc.h"
 
-#define MAXVAL 100	/* maximum depth of val stack */
 
-int sp = 0;			/* next free stack position */
-double val[MAXVAL];	/* value stack */
+typedef struct dvalstack {
+    double val;
+    struct dvalstack* next;
+    } dvalstack;
+
+dvalstack* valuestack; // file local stack
 
 /* push: push f onto value stack */
 void push(double f) {
-    if (sp < MAXVAL)
-        val[sp++] = f;
+    dvalstack* new  = calloc(1,sizeof(dvalstack));
+    if (new != NULL) {
+        new->val = f;
+        new->next = valuestack;
+        valuestack = new;
+        return;
+        }
     else
-        fprintf(stderr, "error: stack full, can't push %g\n", f);
+        fprintf(stderr, "error: can't push on stack\n");
+    return;
     }
 
-/*pop: pop and return top value from stack */
-double pop(void) {
-    if (sp > 0)
-        return val[--sp];
-    else
+/* pop: pop and return top value from stack */
+double  pop(void) {
+    if (valuestack == NULL) {
         fprintf(stderr, "error: stack empty\n");
-    return 0.0;
+        return 0.0;
+        }
+    double res = valuestack->val;
+    dvalstack* toDel = valuestack;
+    valuestack = valuestack->next;
+    free(toDel);
+    return res;
     }
+
+/* cleanStack: free all elements on stack */
+bool cleanStack(void) {
+    dvalstack* runner;
+    while((runner = valuestack) != NULL) {
+        valuestack = valuestack->next;
+        free(runner);
+        }
+    //fprintf(stderr, "info: done, cleaning stack\n");
+    return true;
+}
+

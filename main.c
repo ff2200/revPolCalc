@@ -43,6 +43,10 @@ int main(int argc, const char* argv[]) {
                 break;
             }
         }
+
+    // make sure that stack is clean 
+    cleanStack();
+    cleanInputBuffer();
     return 0;
     }
 
