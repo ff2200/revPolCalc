@@ -17,6 +17,8 @@ int getop(char s[]) {
     while ((s[0] = c = getch()) == ' ' || c == '\t')
         ;
     s[1] = '\0';
+    if (c == 'x') 
+        return LASTRESULT; // this indicates the user means the last result
     if (!isdigit(c) && c != '.')
         return c; // not a number
     i = 0;

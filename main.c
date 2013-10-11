@@ -12,9 +12,15 @@ int main(int argc, const char* argv[]) {
     int type;
     double op2;
     char s[MAXOP];
+    
+    double lastResult = 0.0;
+
 
     while ((type = getop(s)) != EOF) {
         switch(type) {
+            case LASTRESULT:
+                push(lastResult);
+                break;
             case NUMBER:
                 push(atof(s));
                 break;
@@ -36,7 +42,8 @@ int main(int argc, const char* argv[]) {
                     fprintf(stderr, "error: zero divisor\n");
                 break;
             case '\n' :
-                printf("\t%.8g\n", pop());
+                lastResult = pop();
+                printf("\t%.8g\n", lastResult);
                 break;
             default:
                 fprintf(stderr, "error: unkown command %s\n", s);

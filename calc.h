@@ -2,6 +2,7 @@
 #define CALC_H_INCLUDED
 
 #define NUMBER '0'
+#define LASTRESULT '1'
 
 void push(double);
 
