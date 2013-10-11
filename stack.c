@@ -1,7 +1,7 @@
 #define _GNU_SOURCE
 
 #include <unistd.h>
-#include<stdio.h>
+#include <stdio.h>
 #include "calc.h"
 
 #define MAXVAL 100	/* maximum depth of val stack */

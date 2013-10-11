@@ -13,7 +13,8 @@ int getch(void) { /* get a (possibly pushed-back) character */
     return (bufp > 0) ? buf[--bufp] : getchar();
     }
 
-void ungetch(int c) { /* push character back in input */
+/* ungetch: push character back in input */ 
+void ungetch(int c) { 
     if (bufp >= BUFSIZE)
         fprintf(stderr, "ungetch: too many characters\n");
     else
