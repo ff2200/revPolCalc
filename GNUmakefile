@@ -3,6 +3,7 @@ OBJECTS = getch.o getop.o main.o stack.o
 
 CC = gcc
 CFLAGS = -g -Wall -std=gnu99
+LDLIBS += -lm
 
 MKDIR = mkdir
 BIN_DIR = ./bin
@@ -10,14 +11,12 @@ BIN_DIR = ./bin
 all: $(BIN_DIR) $(TARGETS)
 
 $(BIN_DIR)/revPolCalc: $(OBJECTS)
-		gcc $(CFLAGS)  $^ -o $@
+	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
-$(OBJECTS): %.o: %.c
-		$(COMPILE.c) $(OUTPUT_OPTION) $<
-
+$(OBJECTS): calc.h 
 
 $(BIN_DIR):
-			$(MKDIR) $(BIN_DIR)
+	$(MKDIR) $(BIN_DIR)
 
 
 .PHONY: clean
