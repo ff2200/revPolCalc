@@ -11,7 +11,7 @@ typedef struct dvalstack {
     struct dvalstack* next;
     } dvalstack;
 
-dvalstack* valuestack; // file local stack
+static dvalstack* valuestack; // file local stack
 
 /* push: push f onto value stack */
 void push(double f) {

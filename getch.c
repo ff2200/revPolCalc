@@ -10,7 +10,7 @@ typedef struct inputBuf {
     struct inputBuf* next;
     } inputBuf;
 
-inputBuf* inputBuffer;
+static inputBuf* inputBuffer;
 
 /* getch: the function which actually gets chars! */
 int getch(void) {
